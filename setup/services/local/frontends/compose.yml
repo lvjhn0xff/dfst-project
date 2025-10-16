@@ -2,7 +2,7 @@
 # FRONTEND-SERVICES 
 # -----------------
 services: 
-  mobile: 
+  frontend-mobile: 
     container_name: ${PROJECT_FULL_NAME}_mobile
     build: 
       context: ./frontends
@@ -19,6 +19,7 @@ services:
       - ${PROJECT_ROOT}/setup/vars/.env.final
       - ${DFST_PATH}/.env
     command: sh /home/project/start.sh
+    user: ${PROJECT_USER}
     volumes: 
       - ${PROJECT_ROOT}/source/frontend-mobile:/home/project/source 
       - ./frontends/start.sh:/home/project/start.sh
@@ -34,7 +35,7 @@ services:
       - 1.1.1.1 
       - 8.8.8.8
 
-  web: 
+  frontend-web: 
     container_name: ${PROJECT_FULL_NAME}_web
     build: 
       context: ./frontends 
@@ -43,6 +44,7 @@ services:
         NODE_VERSION: ${PROJECT_CTR_NODE_VERSION}
     working_dir: /home/project/source
     command: sh /home/project/start.sh
+    user: ${PROJECT_USER}
     env_file: 
       - ${PROJECT_ROOT}/setup/vars/.env
       - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}

@@ -9,7 +9,6 @@ services:
         COMPOSER_TAG: ${PROJECT_CTR_COMPOSER_TAG}
     volumes: 
       - ./backend/www.conf:/usr/local/etc/php-fpm.d/www.conf
-    user: root
     command: | 
       sh -c "
         update-ca-certificates && 

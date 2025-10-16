@@ -22,4 +22,5 @@ else
     source setup/scripts/local/setups/setup-backend.sh
 fi
 
+bash setup/fix-permissions
 

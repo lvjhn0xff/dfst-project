@@ -22,6 +22,9 @@ export PROJECT_PATH=$(pwd)
 export RETAG=${PROJECT_IMAGE_TAG:-$(cat ./setup/values/docker-latest-tag)}
 export PROJECT_IMAGE_TAG=${PROJECT_IMAGE_TAG_AS:-$RETAG}
 
+# User
+export PROJECT_USER=$(id -u):$(id -g)
+
 set +a  
 
 

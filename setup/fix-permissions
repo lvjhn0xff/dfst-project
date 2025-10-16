@@ -1,0 +1,7 @@
+#!/bin/bash
+source setup/activate
+
+# Fix permissions through a proxy container.
+docker run \
+    --rm -v ./source:/source alpine \
+    sh -c "chown -R $PROJECT_USER /source"

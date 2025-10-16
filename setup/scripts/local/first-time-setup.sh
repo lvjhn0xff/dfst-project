@@ -18,7 +18,8 @@ bash setup/scripts/local/create.sh
 if [ "$PROJECT_FRONTEND_ONLY" == true ]; then
     source setup/scripts/local/setups/setup-frontend.sh
 else 
-    echo ""
+    source setup/scripts/local/setups/setup-frontend.sh
+    source setup/scripts/local/setups/setup-backend.sh
 fi
 
 

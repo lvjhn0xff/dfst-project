@@ -7,7 +7,13 @@ echo ":: Removing containers and networks."
 bash docker-compose down 
 
 # Reset frontend.
-source setup/scripts/local/resets/reset-frontend.sh 
+# Install dependencies in front-end.
+if [ "$PROJECT_FRONTEND_ONLY" == true ]; then
+    source setup/scripts/local/reset/reset-frontend.sh
+else 
+    source setup/scripts/local/reset/reset-frontend.sh
+    source setup/scripts/local/reset/reset-backend.sh
+fi
 
 # Remove containers.
 echo ":: Removing containers, networks, and volumes."

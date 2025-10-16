@@ -1,0 +1,13 @@
+# ------------
+# WEB FRONTEND
+# ------------
+http://*.{$PROJECT_FQDN_WEB},
+http://{$PROJECT_FQDN_WEB} {
+	redir https://{host}{uri}
+}
+
+https://*.{$PROJECT_FQDN_WEB},
+https://{$PROJECT_FQDN_WEB} {
+	reverse_proxy http://web
+	tls internal
+}

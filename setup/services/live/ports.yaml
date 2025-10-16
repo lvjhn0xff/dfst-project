@@ -1,0 +1,10 @@
+name: ${PROJECT_FULL_NAME}
+
+# --------
+# SERVICES
+# --------
+services: 
+  router-http: 
+    ports: 
+      - "80:80"
+      - "443:443"

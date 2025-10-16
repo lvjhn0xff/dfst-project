@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Activate context.
+source setup/activate
+
+# Run docker compose in DFST folder. 
+cd $DFST_PATH 
+source docker-compose

@@ -1,0 +1,2 @@
+#!/bin/bash
+bash template project run web npm ${@}

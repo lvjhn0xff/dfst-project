@@ -1,0 +1,13 @@
+# ---------------
+# MOBILE FRONTEND
+# --------------
+http://*.{$PROJECT_FQDN_MOBILE},
+http://{$PROJECT_FQDN_MOBILE} {
+	redir https://{host}{uri}
+}
+
+https://*.{$PROJECT_FQDN_MOBILE},
+https://{$PROJECT_FQDN_MOBILE} {
+	reverse_proxy http://mobile:5173
+	tls internal
+}

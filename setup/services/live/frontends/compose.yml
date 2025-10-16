@@ -1,0 +1,61 @@
+# -----------------
+# FRONTEND-SERVICES 
+# -----------------
+services: 
+  mobile: 
+    container_name: ${PROJECT_FULL_NAME}_mobile
+    image: ${PROJECT_DOCKERHUB_PREFIX}_mobile:${PROJECT_IMAGE_TAG}
+    build: 
+      context: ${PROJECT_ROOT} 
+      dockerfile: ./setup/services/live/frontends/Dockerfile.mobile
+      args:  
+        CADDY_VERSION: ${PROJECT_CTR_CADDY_IMAGE}:${PROJECT_CTR_CADDY_TAG}
+    working_dir: /home/project/source
+    environment: 
+      PROJECT_RAW_CLI: ${PROJECT_RAW_CLI:-false}
+    env_file:
+      - ${PROJECT_ROOT}/setup/vars/.env
+      - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.final
+    command: sh /home/project/start.sh
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks: 
+      main: {}
+      dfst-dns-net: 
+        aliases: 
+          - ${PROJECT_FULL_NAME}_mobile
+    dns: 
+      - ${DFST_DNS_IP}
+      - 1.1.1.1 
+      - 8.8.8.8
+
+  web: 
+    container_name: ${PROJECT_FULL_NAME}_web
+    image: ${PROJECT_DOCKERHUB_PREFIX}_web:${PROJECT_IMAGE_TAG}
+    build: 
+      context: ${PROJECT_ROOT} 
+      dockerfile: ./setup/services/live/frontends/Dockerfile.web
+      args:  
+        CADDY_VERSION: ${PROJECT_CTR_CADDY_IMAGE}:${PROJECT_CTR_CADDY_TAG}
+    working_dir: /home/project/source
+    command: sh /home/project/start.sh
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    environment: 
+      PROJECT_RAW_CLI: ${PROJECT_RAW_CLI:-false}
+    env_file:
+      - ${PROJECT_ROOT}/setup/vars/.env
+      - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.final
+    networks: 
+      main: {}
+      dfst-dns-net: 
+        aliases: 
+          - ${PROJECT_FULL_NAME}_web
+    dns: 
+      - ${DFST_DNS_IP}
+      - 1.1.1.1 
+      - 8.8.8.8

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Set up context.
+export PROJECT_RUNTIME_MODE_AS=local
+source setup/activate

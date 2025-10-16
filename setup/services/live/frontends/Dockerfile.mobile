@@ -1,0 +1,15 @@
+# Get parameters.
+ARG CADDY_VERSION=caddy:2.10.2-alpine
+
+# Load caddy.
+FROM $CADDY_VERSION 
+
+# Copy source files. 
+COPY ./source/mobile/dist /home/project/source
+
+# Copy start.sh 
+COPY ./setup/services/live/frontends/start.sh /home/project/start.sh 
+
+# Copy Caddyfile
+COPY ./setup/services/live/frontends/Caddyfile.mobile /home/project/Caddyfile
+

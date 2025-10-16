@@ -1,0 +1,41 @@
+# --------------
+# ROUTER SERVICE
+# --------------
+services: 
+  router-http: 
+    container_name: ${PROJECT_FULL_NAME}_router-http
+    image: ${PROJECT_DOCKERHUB_PREFIX}_router:latest
+    build: 
+      context: ${PROJECT_ROOT}
+      dockerfile: ./setup/services/live/router/http/Dockerfile
+      args: 
+        CADDY_VERSION: ${PROJECT_CTR_CADDY_VERSION}
+    volumes:
+      - caddy-config:/config
+      - caddy-data:/data/caddy/
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - ${PROJECT_ROOT}/setup/vars/.env
+      - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.final
+    command: sh /home/project/start.sh
+    networks: 
+      main: {} 
+      dfst-dns-net: 
+        aliases: 
+          - ${PROJECT_FULL_NAME}_router
+    dns: 
+      - ${DFST_DNS_IP}
+      - 1.1.1.1 
+      - 8.8.8.8
+
+# -------
+# VOLUMES 
+# -------
+volumes: 
+  caddy-config: 
+    driver: local
+  caddy-data: 
+    name: ${DFST_VERSIONED_NAME}-caddy-data
+    external: true 

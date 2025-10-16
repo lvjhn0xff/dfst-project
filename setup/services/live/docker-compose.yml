@@ -1,0 +1,15 @@
+name: ${PROJECT_FULL_NAME}
+
+# --------
+# NETWORKS 
+# --------
+networks: 
+  # Main Network for Project
+  main: 
+    name: ${PROJECT_FULL_NAME}_main
+    driver: bridge
+
+  # DNS Network
+  dfst-dns-net: 
+    name: ${DFST_VERSIONED_NAME}_dns-net
+    external: true

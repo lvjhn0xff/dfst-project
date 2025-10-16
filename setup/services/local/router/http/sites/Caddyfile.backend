@@ -1,1 +1,21 @@
-../../../setup/utils/project/backends/laravel/services/local/router/http/sites/Caddyfile.backend
+# -------
+# BACKEND
+# -------
+http://{$PROJECT_FQDN_BACKEND} {
+	redir https://{host}{uri}
+}
+,
+
+https://{$PROJECT_FQDN_BACKEND} {
+    root * /home/project/source/public
+    encode gzip zstd
+
+    # Explicitly rewrite everything except existing files to index.php
+    @notStatic {
+        not file
+    }
+    rewrite @notStatic /index.php
+
+    php_fastcgi backend:9000
+    file_server
+}

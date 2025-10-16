@@ -1,0 +1,18 @@
+# ---------------
+# LARAVEL BACKEND
+# ---------------
+services: 
+  backend:
+    build: 
+      args: 
+        PHP_FPM_VERSION: ${PROJECT_CTR_PHP_FPM_VERSION}
+        COMPOSER_TAG: ${PROJECT_CTR_COMPOSER_TAG}
+    volumes: 
+      - ./backend/www.conf:/usr/local/etc/php-fpm.d/www.conf
+    user: root
+    command: | 
+      sh -c "
+        update-ca-certificates && 
+        php-fpm --nodaemonize --allow-to-run-as-root
+      "
+      

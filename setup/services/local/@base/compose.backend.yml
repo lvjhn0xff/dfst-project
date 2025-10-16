@@ -1,0 +1,36 @@
+#---------------------
+# BASE BACKEND SERVICE
+# --------------------
+services:
+  backend: 
+    container_name: ${PROJECT_FULL_NAME}_backend 
+    build:
+      context: ./backend 
+      dockerfile: Dockerfile
+    restart: always   
+    working_dir: /home/project/source
+    environment: 
+      PROJECT_RAW_CLI: ${PROJECT_RAW_CLI:-false}
+    env_file: 
+      - ${PROJECT_ROOT}/setup/vars/.env
+      - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.versions
+      - ${PROJECT_ROOT}/setup/vars/.env.locations
+      - ${PROJECT_ROOT}/setup/vars/.env.final  
+      - ${DFST_PATH}/.env
+    command: sh /home/project/start.sh
+    volumes: 
+      - ${PROJECT_ROOT}/source/backend:/home/project/source 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks: 
+      main: {}
+      dfst-dns-net: 
+        aliases: 
+          - ${PROJECT_FULL_NAME}_mobile
+    dns: 
+      - ${DFST_DNS_IP}
+      - 1.1.1.1 
+      - 8.8.8.8
+
+  

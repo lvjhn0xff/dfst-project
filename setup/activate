@@ -5,6 +5,7 @@ set -a
 # Activate environment files.
 source setup/vars/.env 
 source setup/vars/.env.${PROJECT_RUNTIME_MODE_AS:-${PROJECT_RUNTIME_MODE:-local}}
+source setup/vars/.env.versions
 source setup/vars/.env.final
 
 # Get path to DFST main folder.

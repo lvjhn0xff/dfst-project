@@ -20,7 +20,10 @@ services:
     env_file:
       - ${PROJECT_ROOT}/setup/vars/.env
       - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.versions
+      - ${PROJECT_ROOT}/setup/vars/.env.locations
       - ${PROJECT_ROOT}/setup/vars/.env.final
+      - ${DFST_PATH}/.env
     command: sh /home/project/start.sh
     networks: 
       main: {} 

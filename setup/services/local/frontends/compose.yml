@@ -15,11 +15,12 @@ services:
     env_file: 
       - ${PROJECT_ROOT}/setup/vars/.env
       - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.locations
       - ${PROJECT_ROOT}/setup/vars/.env.final
       - ${DFST_PATH}/.env
     command: sh /home/project/start.sh
     volumes: 
-      - ${PROJECT_ROOT}/source/mobile:/home/project/source 
+      - ${PROJECT_ROOT}/source/frontend-mobile:/home/project/source 
       - ./frontends/start.sh:/home/project/start.sh
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
@@ -45,10 +46,12 @@ services:
     env_file: 
       - ${PROJECT_ROOT}/setup/vars/.env
       - ${PROJECT_ROOT}/setup/vars/.env.${PROJECT_RUNTIME_MODE}
+      - ${PROJECT_ROOT}/setup/vars/.env.versions
+      - ${PROJECT_ROOT}/setup/vars/.env.locations
       - ${PROJECT_ROOT}/setup/vars/.env.final
       - ${DFST_PATH}/.env
     volumes: 
-      - ${PROJECT_ROOT}/source/web:/home/project/source 
+      - ${PROJECT_ROOT}/source/frontend-web:/home/project/source 
       - ./frontends/start.sh:/home/project/start.sh
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro

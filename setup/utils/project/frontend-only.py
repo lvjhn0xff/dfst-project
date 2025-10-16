@@ -1,1 +1,0 @@
-print(":: Turning project into a front-end only project.")

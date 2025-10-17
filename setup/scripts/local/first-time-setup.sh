@@ -22,5 +22,9 @@ else
     source setup/scripts/local/setups/setup-backend.sh
 fi
 
+# Fix permissions.
 bash setup/fix-permissions
+
+# Turn of services to ensure a proper on.
+bash template project off
 

@@ -4,7 +4,7 @@
 http://{$PROJECT_FQDN_BACKEND} {
 	redir https://{host}{uri}
 }
-,
+
 
 https://{$PROJECT_FQDN_BACKEND} {
    	reverse_proxy http://backend:8000

@@ -61,5 +61,11 @@ COPY --chown=www-data:www-data \
     ./setup/services/live/backend/clear-config.sh \
     /home/project/clear-config.sh
 
+# Make home project directory.
+RUN mkdir -p /home/project/base 
+
+# Set home directory.
+RUN HOME=/home/project/base
+
 # Entrypoint
 CMD ["php-fpm"]

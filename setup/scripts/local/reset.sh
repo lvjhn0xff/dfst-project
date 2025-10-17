@@ -9,10 +9,10 @@ bash docker-compose down
 # Reset frontend.
 # Install dependencies in front-end.
 if [ "$PROJECT_FRONTEND_ONLY" == true ]; then
-    source setup/scripts/local/reset/reset-frontend.sh
+    source setup/scripts/local/resets/reset-frontend.sh
 else 
-    source setup/scripts/local/reset/reset-frontend.sh
-    source setup/scripts/local/reset/reset-backend.sh
+    source setup/scripts/local/resets/reset-frontend.sh
+    source setup/scripts/local/resets/reset-backend.sh
 fi
 
 # Remove containers.

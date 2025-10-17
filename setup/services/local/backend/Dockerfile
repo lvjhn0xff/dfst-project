@@ -43,6 +43,12 @@ RUN composer global require laravel/installer
 # Add composer global vendor bin to PATH
 ENV PATH="$PATH:/root/.composer/vendor/bin"
 
+# Make project directory.
+RUN mkdir -p /home/project
+
+# Export home variable.
+ENV HOME="/home/project" 
+
 # Expose PHP-FPM port
 EXPOSE 9000
 

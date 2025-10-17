@@ -11,7 +11,9 @@ services:
       - ./backend/www.conf:/usr/local/etc/php-fpm.d/www.conf
       - ./backend/clear-config.sh:/home/project/clear-config.sh
       - caddy-data:/data/caddy
-    command: sh -c "php artisan serve --host 0.0.0.0 --port 8000"
+      - ./backend/start.sh:/home/project/start.sh
+      - psysh-config:/home/project/.config/psysh
+    command: sh /home/project/start.sh
     user: $PROJECT_USER
 
 # -------
@@ -19,4 +21,6 @@ services:
 # -------
 volumes: 
   laravel-storage: 
+    driver: local
+  psysh-config: 
     driver: local

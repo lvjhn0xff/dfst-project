@@ -8,6 +8,6 @@ http://{$PROJECT_FQDN_WEB} {
 
 https://*.{$PROJECT_FQDN_WEB},
 https://{$PROJECT_FQDN_WEB} {
-	reverse_proxy http://web:5173
+	reverse_proxy http://frontend-web:5173
 	tls internal
 }

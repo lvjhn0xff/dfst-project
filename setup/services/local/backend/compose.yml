@@ -9,9 +9,19 @@ services:
         COMPOSER_TAG: ${PROJECT_CTR_COMPOSER_TAG}
     volumes: 
       - ./backend/www.conf:/usr/local/etc/php-fpm.d/www.conf
-    command: | 
+      - ./backend/clear-config.sh:/home/project/clear-config.sh
+      - caddy-data:/data/caddy
+    command: |
       sh -c "
-        update-ca-certificates && 
-        php-fpm --nodaemonize --allow-to-run-as-root
+        useradd -u $USER_ID www-data &&
+        bash /home/project/clear-config.sh &
+        php-fpm --nodaemonize 
       "
-      
+    user: $USER_ID
+
+# -------
+# VOLUMES
+# -------
+volumes: 
+  laravel-storage: 
+    driver: local

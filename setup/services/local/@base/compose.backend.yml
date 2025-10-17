@@ -23,6 +23,7 @@ services:
       - ${PROJECT_ROOT}/source/backend:/home/project/source 
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+    user: ${PROJECT_USER}
     networks: 
       main: {}
       dfst-dns-net: 

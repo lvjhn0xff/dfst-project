@@ -2,9 +2,9 @@
 # FRONTEND-SERVICES 
 # -----------------
 services: 
-  mobile: 
-    container_name: ${PROJECT_FULL_NAME}_mobile
-    image: ${PROJECT_DOCKERHUB_PREFIX}_mobile:${PROJECT_IMAGE_TAG}
+  frontend-mobile: 
+    container_name: ${PROJECT_FULL_NAME}_frontend-mobile
+    image: ${PROJECT_DOCKERHUB_PREFIX}_frontend-mobile:${PROJECT_IMAGE_TAG}
     build: 
       context: ${PROJECT_ROOT} 
       dockerfile: ./setup/services/live/frontends/Dockerfile.mobile
@@ -34,9 +34,9 @@ services:
       - 1.1.1.1 
       - 8.8.8.8
 
-  web: 
-    container_name: ${PROJECT_FULL_NAME}_web
-    image: ${PROJECT_DOCKERHUB_PREFIX}_web:${PROJECT_IMAGE_TAG}
+  frontend-web: 
+    container_name: ${PROJECT_FULL_NAME}_frontend-web
+    image: ${PROJECT_DOCKERHUB_PREFIX}_frontend-web:${PROJECT_IMAGE_TAG}
     build: 
       context: ${PROJECT_ROOT} 
       dockerfile: ./setup/services/live/frontends/Dockerfile.web

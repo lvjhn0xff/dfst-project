@@ -23,7 +23,9 @@ export RETAG=${PROJECT_IMAGE_TAG:-$(cat ./setup/values/docker-latest-tag)}
 export PROJECT_IMAGE_TAG=${PROJECT_IMAGE_TAG_AS:-$RETAG}
 
 # User
-export PROJECT_USER=$(id -u):$(id -g)
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+export PROJECT_USER=$USER_ID:$GROUP_ID
 
 set +a  
 

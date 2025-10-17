@@ -1,0 +1,25 @@
+# ---------------
+# LARAVEL BACKEND
+# ---------------
+services: 
+  backend:
+    build: 
+      args: 
+        PHP_FPM_VERSION: ${PROJECT_CTR_PHP_FPM_VERSION}
+        COMPOSER_TAG: ${PROJECT_CTR_COMPOSER_TAG}
+    volumes: 
+      - caddy-data:/data/caddy
+    command: |
+      sh -c " 
+        bash clear-config.sh &
+        php-fpm --nodaemonize
+      "
+    user: www-data
+      
+
+# -------
+# VOLUMES
+# -------
+volumes: 
+  laravel-storage: 
+    driver: local

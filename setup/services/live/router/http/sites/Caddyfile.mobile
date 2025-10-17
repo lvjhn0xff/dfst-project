@@ -8,6 +8,6 @@ http://{$PROJECT_FQDN_MOBILE} {
 
 https://*.{$PROJECT_FQDN_MOBILE},
 https://{$PROJECT_FQDN_MOBILE} {
-	reverse_proxy http://mobile
+	reverse_proxy http://frontend-mobile
 	tls internal
 }

@@ -3,7 +3,7 @@
 # -----------------
 services: 
   frontend-mobile: 
-    container_name: ${PROJECT_FULL_NAME}_mobile
+    container_name: ${PROJECT_FULL_NAME}_frontend-mobile
     build: 
       context: ./frontends
       dockerfile: Dockerfile
@@ -36,7 +36,7 @@ services:
       - 8.8.8.8
 
   frontend-web: 
-    container_name: ${PROJECT_FULL_NAME}_web
+    container_name: ${PROJECT_FULL_NAME}_frontend-web
     build: 
       context: ./frontends 
       dockerfile: Dockerfile

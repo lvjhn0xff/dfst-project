@@ -49,7 +49,7 @@ EXPOSE 9000
 # Copy project source.
 COPY --chown=www-data:www-data \
     ./source/backend \
-    /home/backend/source
+    /home/project/source
 
 # Copy www.conf 
 COPY --chown=www-data:www-data \

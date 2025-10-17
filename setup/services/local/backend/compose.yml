@@ -11,13 +11,8 @@ services:
       - ./backend/www.conf:/usr/local/etc/php-fpm.d/www.conf
       - ./backend/clear-config.sh:/home/project/clear-config.sh
       - caddy-data:/data/caddy
-    command: |
-      sh -c "
-        useradd -u $USER_ID www-data &&
-        bash /home/project/clear-config.sh &
-        php-fpm --nodaemonize 
-      "
-    user: $USER_ID
+    command: sh -c "php artisan serve --host 0.0.0.0 --port 8000"
+    user: $PROJECT_USER
 
 # -------
 # VOLUMES

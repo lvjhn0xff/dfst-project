@@ -1,2 +1,2 @@
 # DFST 
-Docker Full Stack Template# dfst-project
+Docker Full Stack Template

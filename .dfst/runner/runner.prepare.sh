@@ -1,5 +1,7 @@
 #!/usr/env/bin bash
 
+set -e 
+
 source ./.dfst/runner/runner.base.sh
 
 # --- Settings --- #

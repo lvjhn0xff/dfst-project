@@ -1,5 +1,7 @@
 #!/usr/env/bin bash
 
+# --- prepare runner --- # 
+bash .dfst/runner/runner.prepare.sh
 
-# ---- Install runner ---- # 
-bash .dfst/runner/runner.install.sh
+# --- prepare dns --- # 
+bash .dfst/dns/dns.prepare.sh

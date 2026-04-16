@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 source ./.dfst/runner/runner.base.sh
 
 # --- Extract arguments --- # 
@@ -7,9 +9,7 @@ MODE="${1:-development}"
 COMMAND="${2:-bash}" 
 SCRIPT="${3:-script.sh}"
 
-shift 3
-
-EXTRA_ARGS=("$@") 
+EXTRA_ARGS="${@:4}"
 ENV_FILE="config/${MODE}.env" 
 
 # --- Validate container --- # 
@@ -18,19 +18,12 @@ if [ ! "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
     exit 1
 fi
 
-# --- Validate script --- # 
-if [ ! -f $SCRIPT ]; then 
-    echo "Script '$SCRIPT' not found in current directory."
-    exit 1
-fi
 
 # --- Validate env file --- # 
 if [ ! -f $ENV_FILE ]; then 
     echo "Environment file '$ENV_FILE' not found." 
     exit 1
 fi
-
-echo "Loading environment: $MODE"
 
 # --- Load and export environment to current shell ---- #
 set -a 
@@ -52,5 +45,6 @@ docker exec -it \
         set -a;
         source $ENV_FILE;
         set +a; 
-        $COMMAND '$SCRIPT' $ARGS_STR;
+        source ./.dfst/env/bin/activate;
+        $COMMAND $SCRIPT $EXTRA_ARGS;
     "

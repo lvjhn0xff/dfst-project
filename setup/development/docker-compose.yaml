@@ -1,0 +1,46 @@
+#
+# Docker-Compose File for Development Environment 
+# 
+
+#
+# SERVICES
+# 
+services: 
+  
+  #
+  # HTTP SERVER
+  #
+  http-server: 
+    build: 
+      context: ${PROJECT_DIR}/setup/development/http-server 
+      args: 
+        - PROJECT_BACKEND_HTTP_SERVER_IMAGE=${PROJECT_BACKEND_HTTP_SERVER_IMAGE}
+        - LOCAL_UID=${LOCAL_UID}
+        - LOCAL_GID=${LOCAL_GID}
+    container_name: ${PROJECT_NAME}_http-server 
+    user: "${LOCAL_UID}:${LOCAL_GID}"
+    env_file: 
+      - ${PROJECT_DIR}/config/development.env
+    environment: 
+      - PROJECT_SCRIPT_MODE=${PROJECT_SCRIPT_MODE:-main}
+    volumes: 
+      - ${PROJECT_DIR}/source/backend:/app 
+      - ./http-server/cache:/.cache
+    working_dir: /app 
+    command: bash entrypoints/http-server/entry.sh
+    networks: 
+      - main
+  
+
+#
+# NETWORKS
+# 
+networks:
+  main: 
+    name: ${PROJECT_NAME}_development_main
+    driver: bridge 
+    ipam: 
+      driver: default 
+      config: 
+        - subnet: 10.5.0.0/16 
+          gateway: 10.5.0.1
